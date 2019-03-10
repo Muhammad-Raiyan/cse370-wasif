@@ -1,3 +1,3 @@
 Inventory Number|Item Description|Quantity|Price|Date Purchased|Timestamp
-1|Oranges|5|0.99|01-04-2017|52-10-2019 06.52.01
-2|Apples|10|1.99|02-14-2017|52-10-2019 06.52.01
+1|Oranges|5|0.99|01-04-2017|21-10-2019 07.21.23
+2|Apples|10|1.99|02-14-2017|21-10-2019 07.21.23
