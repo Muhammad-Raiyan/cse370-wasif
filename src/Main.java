@@ -1,3 +1,5 @@
+import jdk.internal.cmm.SystemResourcePressureImpl;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,8 +21,10 @@ public class Main {
         } catch (IllegalArgumentException e){
             System.out.println(USAGE);
             System.out.println(e.getMessage());
+            System.exit(0);
         } catch (Exception e){
             e.printStackTrace();
+            System.exit(0);
         }
 
         // Retrieve flags
