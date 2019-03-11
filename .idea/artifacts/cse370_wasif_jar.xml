@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="cse370-wasif:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/cse370_wasif_jar</output-path>
+    <root id="archive" name="cse370-wasif.jar">
+      <element id="module-output" name="cse370-wasif" />
+    </root>
+  </artifact>
+</component>
