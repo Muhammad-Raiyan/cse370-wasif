@@ -4,9 +4,11 @@ import java.util.Map;
 public class CachedInventory implements Inventory{
 
     private Map<String, ItemModel> inventoryMap;
+    private Logger logger;
 
-    public CachedInventory() {
+    public CachedInventory(Logger logger) {
         inventoryMap = new HashMap<>();
+        this.logger =logger;
     }
 
     @Override
@@ -24,6 +26,8 @@ public class CachedInventory implements Inventory{
 
         // Insert
         inventoryMap.put(name, item);
+
+        logger.log("INSERT", item.toString());
         return id;
     }
 
@@ -39,6 +43,7 @@ public class CachedInventory implements Inventory{
         targetItem.setPurchaseDate(item.getPurchaseDate());
         targetItem.setTimestamp();
 
+        logger.log("UPDATE", targetItem.toString());
         return targetItem.getId();
     }
 
@@ -59,6 +64,7 @@ public class CachedInventory implements Inventory{
             throw new IllegalArgumentException("Item with id " + id + " not found in inventory");
         inventoryMap.remove(targetItem.getName());
 
+        logger.log("DELETE", targetItem.toString());
         return targetItem;
     }
 
@@ -68,6 +74,8 @@ public class CachedInventory implements Inventory{
             throw new IllegalArgumentException(name + " not in inventory");
         ItemModel item = inventoryMap.get(name);
         inventoryMap.remove(name);
+
+        logger.log("DELETE", item.toString());
         return item;
     }
 }

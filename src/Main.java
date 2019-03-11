@@ -27,11 +27,15 @@ public class Main {
             System.exit(0);
         }
 
+        System.out.println("Provided flags: " + options.keySet());
         // Retrieve flags
+        // Required Flags
         boolean useHashTable = options.get("-h").equals("on");
         String inputFileName = options.get("-i");
         String outputFileName = options.get("-o");
+        // Optional Flags
         String directory = options.containsKey("-d") ? options.get("-d") : System.getProperty("user.dir");
+        String logFileName = options.getOrDefault("-l", null);
 
         // Get proper file paths
         File inputFile = null;
@@ -43,12 +47,17 @@ public class Main {
             e.printStackTrace();
         }
 
+        // Setup Logger
+        Logger logger = new Logger();
+        if(logFileName != null)
+            logger = new Logger(directory + File.separator + logFileName);
+
         // Set up inventory type
         Inventory inventory;
         if(useHashTable)
-            inventory = new CachedInventory();
+            inventory = new CachedInventory(logger);
         else
-            inventory = new CachedInventory(); // TODO: Change to DB inventory
+            inventory = new CachedInventory(logger); // TODO: Change to DB inventory
 
         /* -Input- */
         System.out.println("Reading from file: " + inputFile);
@@ -64,6 +73,7 @@ public class Main {
         /* -Output Dump- */
         System.out.println("Dumping data to " + outputFile);
         dumpOutput(outputFile, items);
+        logger.closeLogger();
     }
 
     private static List<ItemModel> getInputData(File inputFile){
